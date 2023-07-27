@@ -33,7 +33,7 @@ const HomeLayout = () => {
     setPage(pageNumber);
   };
 
-  const {state, setState} = useData();
+  const {state, setState} = useData()!; 
 
   return (
     <Box w="100%">

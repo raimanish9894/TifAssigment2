@@ -21,7 +21,7 @@ const validationSchema = yup.object().shape({
 const InterviewDetailsForm: React.FC<{
   handleTab: (n: PageNumbers) => void;
 }> = ({ handleTab }) => {
-  const { state, setState } = useData();
+  const { state, setState } = useData()!; 
   const {
     errors,
     touched,

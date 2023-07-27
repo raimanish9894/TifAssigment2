@@ -11,7 +11,7 @@ import { useData } from "./DataProvider";
 const JobDetailsForm: React.FC<{
   handleTab: (n: PageNumbers) => void;
 }> = ({ handleTab }) => {
-  const {state, setState} = useData();
+  const {state, setState} = useData()!; 
   const { handleChange,
     errors,
     touched,
