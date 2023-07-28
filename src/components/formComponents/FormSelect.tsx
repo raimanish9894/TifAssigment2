@@ -36,6 +36,8 @@ const FormSelect: React.FC<IFormSelectProps> = ({
     onBlur && onBlur(name, true);
   };
 
+  
+
   return (
     <FromWrapper
       isInvalid={Boolean(error && touched)}
@@ -45,56 +47,54 @@ const FormSelect: React.FC<IFormSelectProps> = ({
       error={error as string}
       touched={touched}
     >
-      <ReactSelect
-        name={name}
-        placeholder={placeholder}
-        value={options.find((item: { value: string }) => item?.value === value)}
-        onChange={handleChange}
-        onBlur={handleBlur}
-        options={options}
-        // styles
-        styles={{
-          container: (base) => ({
-            ...base,
-            width: "100%",
-            minWidth: "none",
-            height: "auto",
-            maxHeight: "200px",
-            minHeight: "none",
-            position:"relative"
-          }),
-          control: (base, { isFocused }) => ({
-            ...base,
-            width: "100%",
-            minWidth: "272px",
-            height: "45px",
-            border: isFocused
-              ? `1px solid ${theme.colors.primary}`
-              : error
-              ? `1px solid ${theme.colors.errorRed}`
-              : "1px solid #c0bcd7",
-            backgroundColor: theme.colors.inputBg,
-            borderRadius: "10px",
-            fontSize: ".875rem",
-            fontWeight: "500",
-            "&:hover": {
-              border: `1px solid ${theme.colors.primary}`,
-            },
-          }),
-          valueContainer: (base) => ({
-            ...base,
-            paddingLeft: "20px",
-          }),
-          option: (base, { isFocused }) => ({
-            ...base,
-            fontSize: ".875rem",
-            fontWeight: "500",
-          }),
-        }}
-        menuPortalTarget={document.body}
-        menuPosition="fixed"
-        {...selectProps}
-      />
+      {typeof window !== "undefined" ? ( // Check if we are on the client-side
+        <ReactSelect
+          name={name}
+          placeholder={placeholder}
+          value={options.find((item: { value: string }) => item?.value === value)}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          options={options}
+          // styles
+          styles={{
+            container: (base) => ({
+              ...base,
+              width: "100%",
+            }),
+            control: (base, { isFocused }) => ({
+              ...base,
+              width: "100%",
+              minWidth: "272px",
+              height: "45px",
+              border: isFocused
+                ? `1px solid ${theme.colors.primary}`
+                : error
+                ? `1px solid ${theme.colors.errorRed}`
+                : "1px solid #c0bcd7",
+              backgroundColor: theme.colors.inputBg,
+              borderRadius: "10px",
+              fontSize: ".875rem",
+              fontWeight: "500",
+              "&:hover": {
+                border: `1px solid ${theme.colors.primary}`,
+              },
+            }),
+            valueContainer: (base) => ({
+              ...base,
+              paddingLeft: "20px",
+            }),
+            option: (base, { isFocused }) => ({
+              ...base,
+              fontSize: ".875rem",
+              fontWeight: "500",
+            }),
+          }}
+          // menu portal and position
+          menuPortalTarget={document.body}
+          menuPosition="fixed"
+          {...selectProps}
+        />
+      ) : null}
       {children}
     </FromWrapper>
   );
