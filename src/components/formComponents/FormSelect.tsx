@@ -59,8 +59,9 @@ const FormSelect: React.FC<IFormSelectProps> = ({
             width: "100%",
             minWidth: "none",
             height: "auto",
-            maxHeight: "none",
+            maxHeight: "200px",
             minHeight: "none",
+            position:"relative"
           }),
           control: (base, { isFocused }) => ({
             ...base,
@@ -90,6 +91,8 @@ const FormSelect: React.FC<IFormSelectProps> = ({
             fontWeight: "500",
           }),
         }}
+        menuPortalTarget={document.body}
+        menuPosition="fixed"
         {...selectProps}
       />
       {children}
